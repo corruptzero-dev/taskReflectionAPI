@@ -36,6 +36,9 @@ public class Main {
         for(Class c:children){
             System.out.println("\t-> "+c);
             System.out.println("\t\t- "+c.getConstructor());
+            for(Field f1:parentClass.getFields()){
+                System.out.println("\t\t+ "+f1);
+            }
             for(Method m1:c.getDeclaredMethods()){
                 System.out.println("\t\t* "+m1);
             }
