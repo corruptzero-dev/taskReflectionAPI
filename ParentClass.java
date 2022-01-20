@@ -1,6 +1,9 @@
 package task;
 
+
 public class ParentClass {
+    @SomeAnnotation(name="parentClass int field")
+    public int someInt = 9999999;
     public String somefield = "";
 
     public void init(String somefield) {
@@ -21,6 +24,9 @@ public class ParentClass {
     }
 
     public static class Child1{
+        @SomeAnnotation(name="child1 class int field")
+        public int someInt = 9999999;
+
         public String somefield1 = "";
 
         public void init(String somefield1) {
@@ -30,6 +36,4 @@ public class ParentClass {
             System.out.println(somefield1);
         }
     }
-
-
 }
