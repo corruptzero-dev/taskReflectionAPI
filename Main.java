@@ -28,21 +28,30 @@ public class Main {
         System.out.println(parentClass.getName());
         System.out.println(" - "+parentClass.getConstructor());
         for (Field f:fields){
-            System.out.println(" + " + f);
+            if (!f.isAnnotationPresent(SomeAnnotation.class)){
+                System.out.println(" + " + f);
+            }
         }
         for(Method m:methods){
-            System.out.println(" * "+m);
-        }
-        for(Class c:children){
-            System.out.println("\t-> "+c);
-            System.out.println("\t\t- "+c.getConstructor());
-            for(Field f1:parentClass.getFields()){
-                System.out.println("\t\t+ "+f1);
-            }
-            for(Method m1:c.getDeclaredMethods()){
-                System.out.println("\t\t* "+m1);
+            if (!m.isAnnotationPresent(SomeAnnotation.class)){
+                System.out.println(" * " + m);
             }
         }
-
+        for(Class<? extends Object> c:children){
+            if (!c.isAnnotationPresent(SomeAnnotation.class)) {
+                System.out.println("\t-> " + c);
+                System.out.println("\t\t- " + c.getConstructor());
+                for (Field f1 : c.getFields()) {
+                    if (!f1.isAnnotationPresent(SomeAnnotation.class)) {
+                        System.out.println("\t\t+ " + f1);
+                    }
+                }
+                for (Method m1 : c.getDeclaredMethods()) {
+                    if (!m1.isAnnotationPresent(SomeAnnotation.class)) {
+                        System.out.println("\t\t* " + m1);
+                    }
+                }
+            }
+        }
     }
 }
